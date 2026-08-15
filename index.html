@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<title>V.one — Train Your Mind</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+    background:#080b18;
+    color:#fff;
+    min-height:100vh;
+}
+
+header{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:#0d1121;
+    border-bottom:1px solid #252b40;
+}
+
+.logo{
+    font-size:29px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#7c5cff;
+}
+
+.header-buttons{
+    display:flex;
+    gap:10px;
+}
+
+button{
+    border:0;
+    border-radius:13px;
+    padding:13px 21px;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.primary{
+    background:#7c5cff;
+    color:white;
+}
+
+.secondary{
+    background:#191f33;
+    color:white;
+    border:1px solid #303850;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.screen{
+    display:none;
+}
+
+.screen.active{
+    display:block;
+}
+
+.hero{
+    min-height:calc(100vh - 72px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:45px 20px;
+}
+
+.hero-content{
+    width:100%;
+    max-width:950px;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border-radius:50px;
+    background:#19152e;
+    border:1px solid #393060;
+    color:#bcb0ff;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(45px,8vw,82px);
+    line-height:1;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    color:#7c5cff;
+}
+
+.hero-description{
+    max-width:650px;
+    margin:auto;
+    color:#aab3ca;
+    font-size:19px;
+    line-height:1.6;
+}
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:13px;
+    margin-top:32px;
+    flex-wrap:wrap;
+}
+
+.actions button{
+    min-width:160px;
+    padding:16px 25px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:55px;
+}
+
+.feature{
+    text-align:left;
+    padding:25px;
+    border-radius:20px;
+    background:#111629;
+    border:1px solid #272e46;
+}
+
+.feature-icon{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.feature h3{
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:#8e98b3;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* AUTH */
+
+.auth-screen{
+    min-height:calc(100vh - 72px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px;
+}
+
+.auth-screen.active{
+    display:flex;
+}
+
+.auth-box{
+    width:100%;
+    max-width:430px;
+    background:#111629;
+    border:1px solid #2b334b;
+    border-radius:24px;
+    padding:34px;
+}
+
+.auth-box h2{
+    font-size:29px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#8e98b3;
+    margin-bottom:27px;
+}
+
+.field{
+    margin-bottom:17px;
+}
+
+.field label{
+    display:block;
+    color:#cbd2e4;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.field input{
+    width:100%;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #303850;
+    background:#080b18;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+.field input:focus{
+    border-color:#7c5cff;
+}
+
+.auth-submit{
+    width:100%;
+    margin-top:4px;
+}
+
+.switch{
+    text-align:center;
+    color:#8e98b3;
+    margin-top:20px;
+}
+
+.switch button{
+    background:none;
+    color:#9b8aff;
+    padding:0;
+    font-size:15px;
+}
+
+.message{
+    display:none;
+    padding:11px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.error{
+    background:#321722;
+    color:#ff8294;
+}
+
+.success{
+    background:#142d22;
+    color:#67e69c;
+}
+
+/* DASHBOARD */
+
+#dashboard{
+    display:none;
+}
+
+.dashboard{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.welcome{
+    margin-bottom:28px;
+}
+
+.welcome h1{
+    font-size:38px;
+    margin-bottom:7px;
+}
+
+.welcome p{
+    color:#8e98b3;
+}
+
+.baseline{
+    text-align:center;
+    background:#111629;
+    border:1px solid #2b334b;
+    border-radius:24px;
+    padding:40px 20px;
+    margin-bottom:20px;
+}
+
+.baseline-icon{
+    font-size:52px;
+    margin-bottom:15px;
+}
+
+.baseline p{
+    color:#929bb5;
+    max-width:620px;
+    margin:10px auto 22px;
+    line-height:1.6;
+}
+
+.mode-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.mode{
+    background:#111629;
+    border:1px solid #272e46;
+    border-radius:20px;
+    padding:25px;
+}
+
+.mode-icon{
+    font-size:36px;
+    margin-bottom:12px;
+}
+
+.mode h3{
+    margin-bottom:8px;
+}
+
+.mode p{
+    color:#8e98b3;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.logout{
+    margin-top:25px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+    .features,
+    .mode-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    header{
+        padding:0 18px;
+    }
+
+    .header-buttons .secondary{
+        display:none;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero-description{
+        font-size:17px;
+    }
+
+    .auth-box{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        V<span>.one</span>
+    </div>
+
+    <div class="header-buttons" id="headerButtons">
+        <button class="secondary" onclick="showLogin()">Login</button>
+        <button class="primary" onclick="showSignup()">Sign Up</button>
+    </div>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🧠 Welcome to V.one
+            </div>
+
+            <h1>
+                Train your <span>mind.</span><br>
+                Discover your potential.
+            </h1>
+
+            <p class="hero-description">
+                Test your reasoning, challenge your brain,
+                track your progress and build your skills.
+            </p>
+
+            <div class="actions">
+
+                <button class="primary" onclick="showSignup()">
+                    🚀 Get Started
+                </button>
+
+                <button class="secondary" onclick="showLogin()">
+                    Login
+                </button>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">🧠</div>
+
+                    <h3>IQ Assessment</h3>
+
+                    <p>
+                        Take your first IQ-style assessment
+                        and create your starting performance profile.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">⚡</div>
+
+                    <h3>Boost IQ</h3>
+
+                    <p>
+                        Challenge your brain with short
+                        training sessions and progressive levels.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">📊</div>
+
+                    <h3>Track Progress</h3>
+
+                    <p>
+                        Track your scores, XP, streaks
+                        and performance over time.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SIGN UP -->
+
+<section id="signup" class="auth-screen">
+
+    <div class="auth-box">
+
+        <h2>Create your account</h2>
+
+        <p class="subtitle">
+            Start your V.one journey.
+        </p>
+
+        <div id="signupMessage" class="message"></div>
+
+        <div class="field">
+
+            <label>Username</label>
+
+            <input
+                id="signupUsername"
+                type="text"
+                placeholder="Choose a username"
+                autocomplete="off">
+
+        </div>
+
+        <div class="field">
+
+            <label>Password</label>
+
+            <input
+                id="signupPassword"
+                type="password"
+                placeholder="Create a password">
+
+        </div>
+
+        <button
+            class="primary auth-submit"
+            onclick="signup()">
+
+            Create Account
+
+        </button>
+
+        <div class="switch">
+
+            Already have an account?
+
+            <button onclick="showLogin()">
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOGIN -->
+
+<section id="login" class="auth-screen">
+
+    <div class="auth-box">
+
+        <h2>Welcome back 👋</h2>
+
+        <p class="subtitle">
+            Login to continue your V.one journey.
+        </p>
+
+        <div id="loginMessage" class="message"></div>
+
+        <div class="field">
+
+            <label>Username</label>
+
+            <input
+                id="loginUsername"
+                type="text"
+                placeholder="Your username"
+                autocomplete="off">
+
+        </div>
+
+        <div class="field">
+
+            <label>Password</label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Your password">
+
+        </div>
+
+        <button
+            class="primary auth-submit"
+            onclick="login()">
+
+            Login
+
+        </button>
+
+        <div class="switch">
+
+            Don't have an account?
+
+            <button onclick="showSignup()">
+                Sign Up
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+    <div class="dashboard">
+
+        <div class="welcome">
+
+            <h1>
+                Welcome,
+                <span id="usernameDisplay"></span> 👋
+            </h1>
+
+            <p>
+                Your V.one journey starts here.
+            </p>
+
+        </div>
+
+
+        <div class="baseline">
+
+            <div class="baseline-icon">
+                🧠
+            </div>
+
+            <h2>
+                First: discover your baseline
+            </h2>
+
+            <p>
+                Complete your first assessment to get
+                your starting IQ-style game score and
+                performance analysis.
+            </p>
+
+            <button
+                class="primary"
+                onclick="startIQTest()">
+
+                Start IQ Test →
+
+            </button>
+
+        </div>
+
+
+        <div class="mode-grid">
+
+            <div class="mode">
+
+                <div class="mode-icon">🚀</div>
+
+                <h3>Boost IQ</h3>
+
+                <p>
+                    10-question training sessions.
+                    Free users get limited sessions.
+                </p>
+
+            </div>
+
+
+            <div class="mode">
+
+                <div class="mode-icon">🏋️</div>
+
+                <h3>Practice Mode</h3>
+
+                <p>
+                    Unlimited practice for improving
+                    your reasoning skills.
+                </p>
+
+            </div>
+
+
+            <div class="mode">
+
+                <div class="mode-icon">🌐</div>
+
+                <h3>Play Online</h3>
+
+                <p>
+                    Compete with other players.
+                    Coming in the next V.one update.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="secondary logout"
+            onclick="logout()">
+
+            Log Out
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   SCREEN CONTROL
+========================= */
+
+function hideScreens(){
+
+    document.getElementById("home").classList.remove("active");
+
+    document.getElementById("signup").classList.remove("active");
+
+    document.getElementById("login").classList.remove("active");
+
+    document.getElementById("dashboard").style.display="none";
+
+    document.getElementById("headerButtons").style.display="none";
+}
+
+
+function showHome(){
+
+    hideScreens();
+
+    document.getElementById("home").classList.add("active");
+
+    document.getElementById("headerButtons").style.display="flex";
+}
+
+
+function showSignup(){
+
+    hideScreens();
+
+    document.getElementById("signup").classList.add("active");
+
+}
+
+
+function showLogin(){
+
+    hideScreens();
+
+    document.getElementById("login").classList.add("active");
+
+}
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+function signup(){
+
+    const username =
+        document.getElementById("signupUsername").value.trim();
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+    const message =
+        document.getElementById("signupMessage");
+
+
+    message.className="message";
+    message.style.display="none";
+
+
+    if(username.length < 3){
+
+        message.textContent=
+            "Username must be at least 3 characters.";
+
+        message.classList.add("error");
+        message.style.display="block";
+
+        return;
+    }
+
+
+    if(password.length < 4){
+
+        message.textContent=
+            "Password must be at least 4 characters.";
+
+        message.classList.add("error");
+        message.style.display="block";
+
+        return;
+    }
+
+
+    const existing =
+        localStorage.getItem("voneUser");
+
+
+    if(existing){
+
+        const oldUser=JSON.parse(existing);
+
+        if(oldUser.username.toLowerCase()
+            ===username.toLowerCase()){
+
+            message.textContent=
+                "This username already exists.";
+
+            message.classList.add("error");
+            message.style.display="block";
+
+            return;
+        }
+
+    }
+
+
+    const user={
+
+        username:username,
+
+        password:password,
+
+        firstTestCompleted:false,
+
+        iqScore:null,
+
+        xp:0,
+
+        level:1,
+
+        streak:0
+
+    };
+
+
+    localStorage.setItem(
+        "voneUser",
+        JSON.stringify(user)
+    );
+
+
+    message.textContent=
+        "Account created! You can now login.";
+
+    message.classList.add("success");
+    message.style.display="block";
+
+
+    setTimeout(function(){
+
+        showLogin();
+
+    },900);
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+    const username =
+        document.getElementById("loginUsername").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    message.className="message";
+    message.style.display="none";
+
+
+    const saved =
+        localStorage.getItem("voneUser");
+
+
+    if(!saved){
+
+        message.textContent=
+            "No account found. Please sign up first.";
+
+        message.classList.add("error");
+        message.style.display="block";
+
+        return;
+    }
+
+
+    const user=JSON.parse(saved);
+
+
+    if(
+        username.toLowerCase() !==
+        user.username.toLowerCase() ||
+        password !== user.password
+    ){
+
+        message.textContent=
+            "Incorrect username or password.";
+
+        message.classList.add("error");
+        message.style.display="block";
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "voneLoggedIn",
+        "true"
+    );
+
+
+    openDashboard(user);
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function openDashboard(user){
+
+    hideScreens();
+
+    document.getElementById("dashboard").style.display="block";
+
+    document.getElementById("usernameDisplay")
+        .textContent=user.username;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+    localStorage.removeItem("voneLoggedIn");
+
+    showHome();
+
+}
+
+
+/* =========================
+   FIRST IQ TEST
+========================= */
+
+function startIQTest(){
+
+    alert(
+        "The V.one first IQ assessment is coming next. 🧠"
+    );
+
+}
+
+
+/* =========================
+   AUTO LOGIN
+========================= */
+
+window.addEventListener("load",function(){
+
+    const loggedIn =
+        localStorage.getItem("voneLoggedIn");
+
+    const saved =
+        localStorage.getItem("voneUser");
+
+
+    if(loggedIn==="true" && saved){
+
+        openDashboard(JSON.parse(saved));
+
+    }else{
+
+        showHome();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
